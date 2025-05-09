@@ -1,6 +1,9 @@
-import { Handler, Item, Router } from './types.js';
-import { createItem, getItem, getAllItems, updateItem, deleteItem } from './database.js';
-import { parseJSONBody, parseUrlParams, sendResponse } from './utils.js';
+// import { Handler, Item, Router } from './types.js';
+// import { createItem, getItem, getAllItems, updateItem, deleteItem } from './database.js';
+// import { parseJSONBody, parseUrlParams, sendResponse } from './utils.js';
+const { parseJSONBody, parseUrlParams, sendResponse } = require('./utils');
+const { createItem, getItem, getAllItems, updateItem, deleteItem } = require('./database');
+const types = require('./types');
 
 const routes: Router = {
   '/items': {
@@ -46,7 +49,7 @@ const routes: Router = {
   },
 };
 
-export const findRouteHandler = (
+const findRouteHandler = (
   method: string,
   path: string,
 ): { handler: Handler; params: Record<string, string> } | null => {
@@ -58,3 +61,5 @@ export const findRouteHandler = (
   }
   return null;
 };
+
+module.exports = { findRouteHandler };

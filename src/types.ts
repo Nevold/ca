@@ -1,26 +1,28 @@
-import { IncomingMessage, ServerResponse } from 'http';
+const { IncomingMessage, ServerResponse } = require('http');
 
-export interface Item {
+interface Item {
   id: string;
   name?: string;
   description?: string;
   [key: string]: unknown;
 }
 
-export interface Database {
+interface Database {
   [key: string]: Item;
 }
 
 export type Handler = (
-  req: IncomingMessage,
-  res: ServerResponse,
+  req: typeof IncomingMessage,
+  res: typeof ServerResponse,
   params?: Record<string, string>,
 ) => Promise<void> | void;
 
-export interface Route {
+interface Route {
   [method: string]: Handler;
 }
 
-export interface Router {
+interface Router {
   [path: string]: Route;
 }
+
+export type { Router, Route, Database, Item };

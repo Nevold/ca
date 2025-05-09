@@ -1,6 +1,8 @@
-import { IncomingMessage, ServerResponse } from 'http';
+// import { IncomingMessage, ServerResponse } from 'http';
 
-export const parseJSONBody = <T>(req: IncomingMessage): Promise<T | null> => {
+const { IncomingMessage, ServerResponse } = require('http');
+
+const parseJSONBody = <T>(req: typeof IncomingMessage): Promise<T | null> => {
   return new Promise((resolve) => {
     const decoder = new TextDecoder();
     let buffer = Buffer.from([]);
@@ -19,13 +21,13 @@ export const parseJSONBody = <T>(req: IncomingMessage): Promise<T | null> => {
   });
 };
 
-export const sendResponse = (res: ServerResponse, statusCode: number, payload?: unknown): void => {
+const sendResponse = (res: typeof ServerResponse, statusCode: number, payload?: unknown): void => {
   res.setHeader('Content-Type', 'application/json');
   res.writeHead(statusCode);
   res.end(payload ? JSON.stringify(payload) : '');
 };
 
-export const parseUrlParams = (path: string, pattern: string): Record<string, string> | null => {
+const parseUrlParams = (path: string, pattern: string): Record<string, string> | null => {
   const pathParts = path.split('/');
   const patternParts = pattern.split('/');
 
@@ -43,3 +45,5 @@ export const parseUrlParams = (path: string, pattern: string): Record<string, st
 
   return params;
 };
+
+module.exports = { parseUrlParams, sendResponse, parseJSONBody };
