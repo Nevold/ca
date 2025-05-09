@@ -21,4 +21,8 @@ module.exports = {
     filename: 'server.js',
     path: path.resolve(__dirname, 'dist'),
   },
+  optimization: {
+    minimize: true,
+  },
+  mode: 'production',
 };
