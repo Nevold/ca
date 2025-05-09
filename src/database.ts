@@ -1,4 +1,4 @@
-import { Database, Item } from './types.js';
+import { Database, Item } from './types.ts';
 import { v4 as uuidv44 } from 'uuid';
 
 const db: Database = {};

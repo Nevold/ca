@@ -1,8 +1,8 @@
 import 'dotenv/config';
 import http from 'http';
 import { URL } from 'url';
-import { sendResponse } from './utils.js';
-import { findRouteHandler } from './router.js';
+import { sendResponse } from './utils.ts';
+import { findRouteHandler } from './router.ts';
 
 export const server = http.createServer(async (req, res) => {
   try {

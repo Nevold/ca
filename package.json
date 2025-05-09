@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development NODE_NO_WARNINGS=1 node --loader ts-node/esm src/server.ts",
     "start": "node dist/server.js",
-    "build": "tsc && esbuild src/server.ts --bundle --platform=node --outfile=dist/server.js",
+    "build": "cross-env NODE_ENV=production tsc && webpack ",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",
     "format": "prettier --write src/**/*.ts",

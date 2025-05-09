@@ -1,6 +1,6 @@
-import { Handler, Item, Router } from './types.js';
-import { createItem, getItem, getAllItems, updateItem, deleteItem } from './database.js';
-import { parseJSONBody, parseUrlParams, sendResponse } from './utils.js';
+import { Handler, Item, Router } from './types.ts';
+import { createItem, getItem, getAllItems, updateItem, deleteItem } from './database.ts';
+import { parseJSONBody, parseUrlParams, sendResponse } from './utils.ts';
 
 const routes: Router = {
   '/items': {
