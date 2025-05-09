@@ -2,28 +2,18 @@
   "name": "crud-api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development NODE_NO_WARNINGS=1 node --loader ts-node/esm src/server.ts",
+    "dev": "cross-env NODE_ENV=development ts-node-dev --respawn src/server.ts",
+    "start:prod": "npm run build && npm run start",
+    "build": "cross-env NODE_ENV=production webpack --mode production",
     "start": "node dist/server.js",
-    "build": "tsc && esbuild src/server.ts --bundle --platform=node --outfile=dist/server.js",
-    "lint": "eslint . --ext .ts",
-    "lint:fix": "eslint . --ext .ts --fix",
+    "lint": "eslint src --ext .ts",
     "format": "prettier --write src/**/*.ts",
     "test": "cross-env NODE_ENV=test jest"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Nevold/crud-api.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "module",
-  "bugs": {
-    "url": "https://github.com/Nevold/crud-api/issues"
-  },
-  "homepage": "https://github.com/Nevold/crud-api#readme",
   "devDependencies": {
     "@types/jest": "^29.5.14",
     "@types/node": "^22.15.17",

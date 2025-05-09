@@ -1,14 +1,12 @@
-import tsEslint from '@typescript-eslint/eslint-plugin';
-import tsParser from '@typescript-eslint/parser';
-import prettier from 'eslint-plugin-prettier';
-import eslintConfigPrettier from 'eslint-config-prettier';
+const tsEslint = require('@typescript-eslint/eslint-plugin');
+const tsParser = require('@typescript-eslint/parser');
+const prettier = require('eslint-plugin-prettier');
+const eslintConfigPrettier = require('eslint-config-prettier');
 
-const baseIgnores = ['**/node_modules/**', '**/dist/**', '**/coverage/**', '**/*.config.js'];
-
-export default [
+module.exports = [
   {
-    files: ['**/*.ts'],
-    ignores: baseIgnores,
+    files: ['src/*.ts'],
+    ignores: ['**/*.config.js'],
     languageOptions: {
       parser: tsParser,
       parserOptions: {
@@ -26,7 +24,7 @@ export default [
       ...eslintConfigPrettier.rules,
       'prettier/prettier': 'error',
       '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
-      'no-console': 'off',
+      'no-console': 'warn',
     },
   },
 ];
