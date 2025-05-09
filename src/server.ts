@@ -28,8 +28,8 @@ server.listen(Number(PORT), 'localhost', (error?: Error) => {
 });
 
 process.on('SIGINT', () => {
+  console.log('Server closed');
   server.close(() => {
-    console.log('Server closed');
     process.exit(0);
   });
 });
