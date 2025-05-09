@@ -1,1 +1,3 @@
-console.log(1);
+import { a } from './test.js';
+
+console.log(a);
