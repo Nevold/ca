@@ -19,11 +19,13 @@ export const parseJSONBody = <T>(req: IncomingMessage): Promise<T | null> => {
   });
 };
 
-export const sendResponse = (res: ServerResponse, statusCode: number, payload?: unknown): void => {
-  res.setHeader('Content-Type', 'application/json');
-  res.writeHead(statusCode);
-  res.end(payload ? JSON.stringify(payload) : '');
-};
+export class Utils {
+  static sendResponse = (res: ServerResponse, statusCode: number, payload?: unknown): void => {
+    res.setHeader('Content-Type', 'application/json');
+    res.writeHead(statusCode);
+    res.end(payload ? JSON.stringify(payload) : '');
+  };
+}
 
 export const parseUrlParams = (path: string, pattern: string): Record<string, string> | null => {
   const pathParts = path.split('/');

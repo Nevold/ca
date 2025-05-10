@@ -1,8 +1,8 @@
 import 'dotenv/config';
 import http from 'http';
 import { URL } from 'url';
-import { sendResponse } from './utils.ts';
 import { findRouteHandler } from './router.ts';
+import { Utils } from './utils.ts';
 
 export const server = http.createServer(async (req, res) => {
   try {
@@ -13,11 +13,11 @@ export const server = http.createServer(async (req, res) => {
     if (route) {
       await route.handler(req, res, route.params);
     } else {
-      sendResponse(res, 404, { error: 'Not Found' });
+      Utils.sendResponse(res, 404, { error: 'Not Found' });
     }
   } catch (error) {
     console.error('Server error:', error);
-    sendResponse(res, 500, { error: 'Internal Server Error' });
+    Utils.sendResponse(res, 500, { error: 'Internal Server Error' });
   }
 });
 
