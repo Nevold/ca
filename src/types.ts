@@ -2,7 +2,7 @@ import { IncomingMessage, ServerResponse } from 'http';
 
 export interface Item {
   id: string;
-  name: string;
+  username: string;
   age: number;
   hobbies: Array<string>;
 }

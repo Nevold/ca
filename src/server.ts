@@ -3,7 +3,6 @@ import http from 'http';
 import { URL } from 'url';
 import { findRouteHandler } from './router.ts';
 import { Utils } from './utils.ts';
-import { db } from './database.ts';
 
 export const server = http.createServer(async (req, res) => {
   try {

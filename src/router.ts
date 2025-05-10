@@ -6,8 +6,15 @@ const routes: Router = {
   '/users': {
     POST: async (req, res) => {
       const data = await parseJSONBody<Item>(req);
-      if (!data?.name) {
-        return Utils.sendResponse(res, 400, { error: 'Name is required' });
+      if (!data) {
+        return Utils.sendResponse(res, 400, { error: 'User fields are required' });
+      }
+      if (!data?.username) {
+        return Utils.sendResponse(res, 400, { error: 'Username is required' });
+      } else if (!data?.age) {
+        return Utils.sendResponse(res, 400, { error: 'Age is required' });
+      } else if (!data?.hobbies) {
+        return Utils.sendResponse(res, 400, { error: 'Hobbies is required' });
       }
       const newItem = createItem(data);
       Utils.sendResponse(res, 201, newItem);
@@ -27,7 +34,7 @@ const routes: Router = {
     },
     PUT: async (req, res, params) => {
       const data = await parseJSONBody<Partial<Item>>(req);
-      if (!data?.name) {
+      if (!data?.username) {
         return Utils.sendResponse(res, 400, { error: 'Name is required' });
       }
       const updatedItem = updateItem(params!.id, data);
