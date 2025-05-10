@@ -3,9 +3,9 @@ import { createItem, getItem, getAllItems, updateItem, deleteItem } from './data
 import { parseJSONBody, parseUrlParams, Utils } from './utils.ts';
 
 const routes: Router = {
-  '/items': {
+  '/users': {
     POST: async (req, res) => {
-      const data = await parseJSONBody<{ name: string; description?: string }>(req);
+      const data = await parseJSONBody<Item>(req);
       if (!data?.name) {
         return Utils.sendResponse(res, 400, { error: 'Name is required' });
       }
@@ -17,7 +17,7 @@ const routes: Router = {
       Utils.sendResponse(res, 200, items);
     },
   },
-  '/items/:id': {
+  '/users /:id': {
     GET: (_, res, params) => {
       const item = getItem(params!.id);
       if (!item) {

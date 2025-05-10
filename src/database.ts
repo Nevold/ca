@@ -1,7 +1,7 @@
 import { Database, Item } from './types.ts';
-import { v4 as uuidv44 } from 'uuid';
+import { v4 as uuid } from 'uuid';
 
-const db: Database = {};
+export const db: Database = {};
 
 export const createItem = (item: Omit<Item, 'id'>): Item => {
   const id = uuidv4();
@@ -27,5 +27,5 @@ export const deleteItem = (id: string): boolean => {
 };
 
 function uuidv4(): string {
-  return uuidv44();
+  return uuid();
 }
