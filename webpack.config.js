@@ -12,6 +12,7 @@ export default {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'server.js',
+    module: true,
   },
   module: {
     rules: [
@@ -30,8 +31,14 @@ export default {
   resolve: {
     extensions: ['.ts', '.js'],
   },
-  externals: [nodeExternals()],
   experiments: {
     outputModule: true,
   },
+  externalsPresets: { node: true },
+  externals: [
+    nodeExternals({
+      modulesFromFile: true,
+      importType: 'module',
+    }),
+  ],
 };
