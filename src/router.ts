@@ -1,6 +1,7 @@
 import { Handler, Item, Router } from './types.ts';
 import { createItem, getItem, getAllItems, updateItem, deleteItem } from './database.ts';
 import { parseJSONBody, parseUrlParams, Utils } from './utils.ts';
+import { validate as uuidValidate } from 'uuid';
 
 const routes: Router = {
   '/users': {
@@ -24,13 +25,18 @@ const routes: Router = {
       Utils.sendResponse(res, 200, items);
     },
   },
-  '/users /:id': {
+  '/users/:id': {
     GET: (_, res, params) => {
-      const item = getItem(params!.id);
-      if (!item) {
-        return Utils.sendResponse(res, 404, { error: 'Item not found' });
+      if (params) {
+        if (!uuidValidate(params.id)) {
+          return Utils.sendResponse(res, 400, { error: 'Invalid User ID' });
+        }
+        const user = getItem(params.id);
+        if (!user) {
+          return Utils.sendResponse(res, 404, { error: "User doesn't exist" });
+        }
+        Utils.sendResponse(res, 200, user);
       }
-      Utils.sendResponse(res, 200, item);
     },
     PUT: async (req, res, params) => {
       const data = await parseJSONBody<Partial<Item>>(req);
