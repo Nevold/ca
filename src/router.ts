@@ -40,14 +40,18 @@ const routes: Router = {
     },
     PUT: async (req, res, params) => {
       const data = await parseJSONBody<Partial<Item>>(req);
-      if (!data?.username) {
-        return Utils.sendResponse(res, 400, { error: 'Name is required' });
+
+      if (params && data) {
+        if (!uuidValidate(params.id)) {
+          return Utils.sendResponse(res, 400, { error: 'Invalid User ID' });
+        }
+
+        const updatedUser = updateItem(params.id, data);
+        if (!updatedUser) {
+          return Utils.sendResponse(res, 404, { error: "User doesn't exist" });
+        }
+        Utils.sendResponse(res, 200, updatedUser);
       }
-      const updatedItem = updateItem(params!.id, data);
-      if (!updatedItem) {
-        return Utils.sendResponse(res, 404, { error: 'Item not found' });
-      }
-      Utils.sendResponse(res, 200, updatedItem);
     },
     DELETE: (_, res, params) => {
       const success = deleteItem(params!.id);
